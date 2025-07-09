@@ -29,7 +29,7 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 ```
 
-Since the port is mapped as 8501:8501 in docker-compose.yml, you can open your browser and access the application at:
+Since the port is mapped as 8000:8000 in docker-compose.yml, you can open your browser and access the the Swagger API screen at:
 http://localhost:8000/docs or http://127.0.0.1:8000/docs
 
 ## Example Query.
@@ -40,3 +40,11 @@ POST /search
 }
 ```
 <img src="example.png" alt="Example"/>
+
+### Smart Legal Search Highlights
+- Uses state-of-the-art Vietnamese Sentence Embedding models (e.g. PhoBERT, SimCSE) to understand user queries semantically — not just by keywords.
+- Implements fast vector similarity search with FAISS or Qdrant for efficient Top-K retrieval.
+- Automatically removes duplicate articles and ranks the most relevant results.
+- Supports hybrid search: combines semantic similarity and keyword scores for better matching.
+- Can be expanded with synonym dictionaries and metadata filters (e.g., filter by specific law types).
+- Evaluates search accuracy with simple metrics like Top-K Accuracy to ensure real-world reliability.
