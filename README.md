@@ -13,6 +13,14 @@ A simple RESTful API for semantic search of Vietnamese legal documents using Fas
 - Qdrant — Vector database for similarity search
 - Docker — Containerized deployment
 
+## Smart Legal Search Highlights
+- Uses state-of-the-art Vietnamese Sentence Embedding models (e.g. PhoBERT, SimCSE) to understand user queries semantically — not just by keywords.
+- Implements fast vector similarity search with FAISS or Qdrant for efficient Top-K retrieval.
+- Automatically removes duplicate articles and ranks the most relevant results.
+- Supports hybrid search: combines semantic similarity and keyword scores for better matching.
+- Can be expanded with synonym dictionaries and metadata filters (e.g., filter by specific law types).
+- Evaluates search accuracy with simple metrics like Top-K Accuracy to ensure real-world reliability.
+
 ## Usage.
 ### 4.1. Load streamlit tool.
 The project is developed using the FastAPI tool. To execute the project:
@@ -40,11 +48,3 @@ POST /search
 }
 ```
 <img src="example.png" alt="Example"/>
-
-### Smart Legal Search Highlights
-- Uses state-of-the-art Vietnamese Sentence Embedding models (e.g. PhoBERT, SimCSE) to understand user queries semantically — not just by keywords.
-- Implements fast vector similarity search with FAISS or Qdrant for efficient Top-K retrieval.
-- Automatically removes duplicate articles and ranks the most relevant results.
-- Supports hybrid search: combines semantic similarity and keyword scores for better matching.
-- Can be expanded with synonym dictionaries and metadata filters (e.g., filter by specific law types).
-- Evaluates search accuracy with simple metrics like Top-K Accuracy to ensure real-world reliability.
