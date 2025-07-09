@@ -20,6 +20,15 @@ The project is developed using the FastAPI tool. To execute the project:
 docker pull xuanhiepp/legal-search-api:latest
 docker run -p 8000:8000 xuanhiepp/legal-search-api:latest
 ```
+
+Wait about 2-3 minutes until the terminal displays as shown below. 
+```bash
+INFO:     Started server process
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+```
+
 Since the port is mapped as 8501:8501 in docker-compose.yml, you can open your browser and access the application at:
 http://localhost:8000/docs or http://127.0.0.1:8000/docs
 
