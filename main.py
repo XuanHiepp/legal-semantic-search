@@ -4,6 +4,7 @@ from typing import List
 from pydantic import BaseModel
 from fastapi import FastAPI
 import os
+import yaml
 os.environ["TRANSFORMERS_NO_TF"] = "1"
 
 
@@ -23,17 +24,24 @@ model = SentenceTransformer(
 
 
 # 3. Connect Qdrant Cloud
-def load_env(env_file):
-    with open(env_file) as file:
-        for line in file:
-            line = line.strip()
-            if line and not line.startswith("#"):
-                key, value = line.split("=", 1)
-                os.environ[key] = value
+def load_env(config_file):
+    if config_file.endswith(".yaml") or config_file.endswith(".yml"):
+        # Load YAML
+        with open(config_file, "r") as f:
+            config = yaml.safe_load(f)
+            for key, value in config.items():
+                os.environ[str(key)] = str(value)
+    else:
+        # Load .env
+        with open(config_file) as file:
+            for line in file:
+                line = line.strip()
+                if line and not line.startswith("#"):
+                    key, value = line.split("=", 1)
+                    os.environ[key.strip()] = value.strip()
 
 
-load_env('.env')
-
+load_env('config.yaml')
 qdrant_url = os.getenv("QDRANT_URL")
 qdrant_key = os.getenv("QDRANT_API_KEY")
 qdrant_client = QdrantClient(
@@ -49,6 +57,7 @@ class SearchRequest(BaseModel):
 
 class SearchResult(BaseModel):
     title: str
+    content: str
 
 
 # 5. Endpoint /search
@@ -73,6 +82,7 @@ def search(req: SearchRequest):
     for hit in hits:
         payload = hit.payload
         title = payload.get("title", "").strip()
+        content = payload.get("text", "").strip()
 
         # If saw the title, skip it.
         if title in seen_titles:
@@ -81,9 +91,8 @@ def search(req: SearchRequest):
         seen_titles.add(title)
 
         results.append(SearchResult(
-            id=payload.get("id"),
             title=title,
-            score=round(hit.score, 4)
+            content=content
         ))
 
     # Get top 5 hits
