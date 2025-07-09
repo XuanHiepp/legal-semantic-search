@@ -30,3 +30,4 @@ POST /search
   "query": "NLĐ bị sa thải có được trả lương hay không?"
 }
 ```
+<img src="example.png" alt="Example"/>
