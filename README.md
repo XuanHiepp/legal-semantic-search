@@ -9,11 +9,8 @@ A simple RESTful API for semantic search of Vietnamese legal documents using Fas
 
 ## Tech Stack
 - FastAPI — Python web API framework
-
 - Sentence-BERT — Vietnamese PhoBERT model for embeddings
-
 - Qdrant — Vector database for similarity search
-
 - Docker — Containerized deployment
 
 ## Usage.
@@ -29,7 +26,9 @@ docker-compose up --build
 ```
 
 ## Example Query.
+```
 POST /search
 {
   "query": "NLĐ bị sa thải có được trả lương hay không?"
 }
+```
