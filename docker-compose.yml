@@ -1,17 +1,9 @@
-version: '3'
-services:
-  qdrant:
-    image: qdrant/qdrant:v2.0.0
-    container_name: qdrant
-    environment:
-      - QDRANT_API_KEY=${QDRANT_API_KEY}
-      - QDRANT_URL=${QDRANT_URL}
-    ports:
-      - "6333:6333"
-    volumes:
-      - qdrant_data:/qdrant/storage
-    restart: always
+version: '3.8'
 
-volumes:
-  qdrant_data:
-    driver: local
+services:
+  legal-semantic-search:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
